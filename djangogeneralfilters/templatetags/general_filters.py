@@ -1,5 +1,6 @@
 # -*- encoding=utf-8 -*-
 from django import template
+import re
 register = template.Library()
 
 @register.filter
@@ -16,6 +17,21 @@ def divide(value, divisor):
         return float(value) / float(divisor)
     except (ValueError, ZeroDivisionError):
         return None
+
+@register.filter
+def append(value,str):
+    """
+    在值的后面添加内容
+    :param value:
+    :param str:
+    :return:
+    """
+    try:
+        return "%s%s"%(value,str)
+    except Exception as e:
+        print e
+        return None
+
 
 @register.filter
 def describe(value,dict_str):
@@ -78,3 +94,18 @@ def range_pagination_5(curr,end):
         result=[curr-2,curr-1,curr,curr+1,curr+2]
     return result
 
+
+@register.filter
+def exclude_str(value,str):
+    """
+    剔除字符串，支持正则表达式
+    :param value:
+    :param str:
+    :return:
+    """
+    pattern=re.compile(str,re.S)
+    result=re.subn(pattern,'',value)
+    try:
+        return result[0]
+    except Exception as e:
+        return None
