@@ -1,5 +1,5 @@
-# django-general-filter-tag
-useful custom django tags and filters.
+# django-general-filters
+Useful Django template filters.
 
 # Demo
 ### divide  
