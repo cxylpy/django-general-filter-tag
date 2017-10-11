@@ -11,12 +11,41 @@ def divide(value, divisor):
     :param divisor:
     :return:
     """
-    if not value:return None
+    if value is None:return None
     if not divisor:return None
     try:
         return float(value) / float(divisor)
     except (ValueError, ZeroDivisionError):
         return None
+
+
+@register.filter
+def subtract(value,num):
+    if value is None:return None
+    if num is None:return None
+    try:
+        return float(value)-float(num)
+    except Exception as e:
+        return None
+
+@register.filter
+def add(value,num):
+    if value is None:return None
+    if num is None:return None
+    try:
+        return float(value)+float(num)
+    except Exception as e:
+        return None
+
+@register.filter
+def times(value,num):
+    if value is None:return None
+    if num is None:return None
+    try:
+        return float(value)*float(num)
+    except Exception as e:
+        return None
+
 
 @register.filter
 def append(value,str):
@@ -26,10 +55,10 @@ def append(value,str):
     :param str:
     :return:
     """
+    if value is None:return None
     try:
-        return "%s%s"%(value,str)
+        return "{0}{1}".format(value,str)
     except Exception as e:
-        print e
         return None
 
 
@@ -57,6 +86,10 @@ def describe(value,dict_str):
             except Exception as e:
                 return None
 
+
+@register.filter
+def pagination_5(curr,end):
+    return range_pagination_5(curr,end)
 
 @register.filter
 def range_pagination_5(curr,end):
@@ -109,3 +142,17 @@ def exclude_str(value,str):
         return result[0]
     except Exception as e:
         return None
+
+
+
+@register.filter
+def get_fields(model):
+    """
+    Returns verbose_name for a field.
+    """
+    return model._meta.fields
+
+@register.filter
+def contains(value,str):
+    print type(str)
+    return ''

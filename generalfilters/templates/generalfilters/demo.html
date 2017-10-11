@@ -1,0 +1,45 @@
+{% load static %}
+{% load general_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>num = 10, { { num|divide:"5" } }</p>
+    <p>{{ num|divide:"5" }}</p><br/>
+    <p>times = 100, { { times|append:" times"} }</p>
+    <p>{{ times|append:" times"}}</p>
+    <p>types = [0,1,2,2,2,1,1,0],{ {type|describe:"0:typeA,1:typeB,2:typeC"} }</p>
+    <p>
+    {% for type in types %}
+    {{type|describe:"0:typeA,1:typeB,2:typeC"}}
+    {% endfor %}
+    </p>
+    <p>
+        src_str='aaabbbcccaaabbbcccaaa', { { src_str|exclude_str:'a' } }
+    </p>
+    <p>
+        {{ src_str|exclude_str:'a' }}
+    </p>
+    <p>
+        num=10,{ {num|add:'20'} }
+    </p>
+    <p>
+        {{num|add:'20'}}
+    </p>
+    <p>
+        num=10,{ {num|subtract:'30'} }
+    </p>
+    <p>
+        {{num|subtract:'30'}}
+    </p>
+    <p>
+        num=10,{ {num|times:'5'} }
+    </p>
+    <p>
+        {{num|times:'5'}}
+    </p>
+</body>
+</html>
